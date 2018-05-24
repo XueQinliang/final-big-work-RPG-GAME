@@ -27,7 +27,7 @@ private:
     QPoint pt;
     QTimer *time;
     world map;
-    int mouse_x=160,mouse_y=128;
+    int mouse_x,mouse_y;
 };
 
 #endif // MAINWINDOW_H
