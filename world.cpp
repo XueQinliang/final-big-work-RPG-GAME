@@ -4,6 +4,12 @@ world::world(){
     map=3;
     gomap(map);
 }
+void world::pdialog(int num){
+    if(num==-2){
+        QMessageBox::about(NULL, "About", "About this application");
+    }
+}
+
 void world::gomap(int num){
     if(num==1)map1();
     if(num==2)map2();
@@ -149,17 +155,15 @@ void world::map3(){//地图3
             }
         }
     }
+    object player(20,20,0,uncoverable);
+    player.pic("://p.png",uncoverable,isplayer);
+    obj[20][20][0]=player;
     obj[17][15][0].pic(9,3,uncoverable,tomap1);
     pix.load("://T1cESnFlFaXXXXXXXX_!!0-item_pic_副本.png");
     plx=800;
     ply=400;
 }
 void world::show(QPainter &paint){
-    /*for(int j=0;j<40;j++){
-        for(int i=0+j%2;i<40;i+=2){
-            ground.show(i,j,0,paint);
-        }
-    }*/
     paint.drawPixmap(0,0,1500,800,pix);
     p1.setplayer(plx,ply,pdire);
     for(int j=0;j<40;j++){
@@ -214,6 +218,13 @@ bool world::cover(int dx,int dy){//判断所遇到的物体的性质
                 if(obj[i][j][0].isbox()==true){
                     obj[i][j][0].pic("://chest05.png",uncoverable,0);
                 }
+                if(obj[i][j][0].isperson()==true&&dialoging==false){
+                    dialoging=true;
+                    pdialog(obj[i][j][0].getspecial());
+                }
+                if(obj[i][j][0].isperson()==false){
+                    dialoging=false;
+                }
                 if(obj[i][j][0].tran()==true){
                     map=obj[i][j][0].getspecial();
                     gomap(map);
@@ -224,3 +235,4 @@ bool world::cover(int dx,int dy){//判断所遇到的物体的性质
     }
     return true;
 }
+
