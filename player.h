@@ -7,12 +7,6 @@
 class player:public abstract{
 public:
     player();
-    int getx(){
-        return px;
-    }
-    int gety(){
-        return py;
-    }
     int getdire(){
         return dire;
     }
@@ -22,7 +16,9 @@ public:
         this->dire=dire;
     }
     void show(QPainter &paint);
+    ~player(){}
 protected:
+    int fullblood,fullmagic,fullexp,blood,magic,exp,level;
     int dire,action;
 private:
     QImage pic[8][8];
