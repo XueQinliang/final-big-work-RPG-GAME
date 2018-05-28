@@ -8,6 +8,8 @@
 #include <qimage.h>
 #include <cmath>
 #include <iostream>
+#include <QMessageBox>
+#include <virplayer.h>
 class world{
 public:
     world();
@@ -17,6 +19,7 @@ public:
     int getpy(){return p1.gety();}
 protected:
     const int box=-1;
+    const int isplayer=-2;
     const int coverable=0;
     const int uncoverable=1;
     const int tomap1=1;
@@ -28,7 +31,9 @@ protected:
     int pdire;
     object obj[40][40][4];
     QPixmap pix;
+    bool dialoging=false;
     void gomap(int num);
+    void pdialog(int num);
     void map1();
     void map2();
     void map3();
