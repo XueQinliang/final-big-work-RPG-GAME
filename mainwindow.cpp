@@ -15,6 +15,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->resize(2000,1000);
+    QMediaPlaylist *playlist=new QMediaPlaylist;
+    playlist->addMedia(QUrl::fromLocalFile("纯音乐-卡农.mp3"));
+    playlist->setCurrentIndex(1);
+    playlist->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+    QMediaPlayer *mp3=new QMediaPlayer;
+    mp3->setPlaylist(playlist);
+    mp3->setVolume(50);
+    mp3->play();
     time=new QTimer(this);
     connect(time,SIGNAL(timeout()),this,SLOT(autop()));
     time->start(20);
