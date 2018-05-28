@@ -4,6 +4,7 @@
 #include <QImage>
 #include "abstract.h"
 #include "constnumber.h"
+#include <iostream>
 class object:public abstract{
 public:
     object(){
@@ -25,7 +26,11 @@ public:
         this->special=special;
     }
     void show(QPainter &paint){//如果物体有z坐标，则用y减两个单位长度来在二维平面表现立体效果
-        paint.drawImage(px,py-pz,picture);
+        if(special==-2){
+            paint.drawImage(px,py-pz-z,picture);
+        }else {
+            paint.drawImage(px,py-pz,picture);
+        }
     }
     void show(int ox,int oy,int oz,QPainter &paint){//把东西放置在具体的某位置
         paint.drawImage(ox*x,oy*y-oz*z,picture);
@@ -37,6 +42,11 @@ public:
     }
     bool tran(){
         if(special>=1)
+            return true;
+        else return false;
+    }
+    bool isperson(){
+        if(special==-2)
             return true;
         else return false;
     }
